@@ -5,8 +5,8 @@ def calculator(request):
     calculation_history = Calculation.objects.order_by('-id')[:5]
 
     if request.method == 'POST':
-        num1 = float(request.POST.get('num1', '0'))
-        num2 = float(request.POST.get('num2', '0'))
+        num1 = int(request.POST.get('num1', '0'))
+        num2 = int(request.POST.get('num2', '0'))
         operator = request.POST.get('operator')
 
         if operator == '+':
