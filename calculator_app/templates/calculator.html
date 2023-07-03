@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+</head>
+<body>
+    <h1>Calculator</h1>
+    <form method="POST" action="{% url 'calculator' %}">
+        {% csrf_token %}
+
+        <label for="num1">First Number:</label>
+        <input type="text" name="num1" required><br><br>
+        
+        <label for="operator">Operator (+, -, *, /):</label>
+        <input type="text" name="operator" required><br><br>
+        
+        <label for="num2">Second Number:</label>
+        <input type="text" name="num2" required><br><br>
+        
+        <input type="submit" value="Calculate">
+    </form>
+
+    {% if result %}
+        <h2>Result: {{ result }}</h2>
+    {% endif %}
+
+    {% if history %}
+        <h2>History:</h2>
+        <ul>
+            {% for calculation in history %}
+                <li>{{ calculation }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
