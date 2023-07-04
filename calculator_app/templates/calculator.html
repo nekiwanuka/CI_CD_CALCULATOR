@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center jumbotron">
         <div class="col-3 align-items-center">
             <h1 class="text-center">Calculator</h1>
             <form method="POST" action="{% url 'calculator' %}">
@@ -26,9 +26,11 @@
                     <label for="num2">Second Number:</label>
                     <input type="text" class="form-control" name="num2" required>
                 </div>
-        
-                <button type="submit" class="btn btn-primary">Calculate</button>
-                <button type="reset" class="btn btn-primary">Reset</button>
+                <div class="d-flex justify-content-around">
+                    <button type="submit" class="btn btn-info">Calculate</button>
+                    <button type="reset" class="btn btn-warning">Reset</button>
+                </div>
+                
             </form>
         
             {% if result %}
