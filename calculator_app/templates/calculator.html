@@ -6,42 +6,54 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">Calculator</h1>
-        <form method="POST" action="{% url 'calculator' %}">
-            {% csrf_token %}
+    {% for message in messages %}
+        <div class="alert alert-{{message.tags}}">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{message}}
+        </div>
+    {% endfor %}
+    <div class="d-flex justify-content-center jumbotron">
+        <div class="col-3 align-items-center">
+            <h1 class="text-center display-4  btn-danger btn-lg">Calculator</h1>
+            <form method="POST" action="{% url 'calculator' %}">
+                {% csrf_token %}
+        
+                <div class="form-group">
+                    <label for="num1">First Number:</label>
+                    <input type="text" class="form-control" name="num1" required>
+                </div>
+        
+                <div class="form-group">
+                    <label for="operator">Operator (+, -, *, /):</label>
+                    <input type="text" class="form-control" name="operator" required>
+                </div>
+        
+                <div class="form-group">
+                    <label for="num2">Second Number:</label>
+                    <input type="text" class="form-control" name="num2" required>
+                </div>
+                <div class="d-flex justify-content-around">
+                    <button type="submit" class="btn btn-info">Calculate</button>
+                    <button type="reset" class="btn btn-warning">Reset</button>
+                </div>
+                
+            </form>
+        
+            {% if result %}
+                <h2 class="mt-3">Result: {{ result }}</h2>
+            {% endif %}
+        
+            {% if history %}
+                <h2 class="mt-3">History:</h2>
+                <ul class="list-group">
+                    {% for calculation in history %}
+                        <li class="list-group-item">{{ calculation }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
     
-            <div class="form-group">
-                <label for="num1">First Number:</label>
-                <input type="text" class="form-control" name="num1" required>
-            </div>
-    
-            <div class="form-group">
-                <label for="operator">Operator (+, -, *, /):</label>
-                <input type="text" class="form-control" name="operator" required>
-            </div>
-    
-            <div class="form-group">
-                <label for="num2">Second Number:</label>
-                <input type="text" class="form-control" name="num2" required>
-            </div>
-    
-            <button type="submit" class="btn btn-primary">Calculate</button>
-        </form>
-    
-        {% if result %}
-            <h2 class="mt-3">Result: {{ result }}</h2>
-        {% endif %}
-    
-        {% if history %}
-            <h2 class="mt-3">History:</h2>
-            <ul class="list-group">
-                {% for calculation in history %}
-                    <li class="list-group-item">{{ calculation }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    </div>  
 
     <!-- Add Bootstrap JS CDN link here (optional) -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
