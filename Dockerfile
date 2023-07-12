@@ -1,5 +1,5 @@
 # Use an official Python runtime as the base image
-FROM python:3.9
+FROM python:3
 
 # Set the working directory in the container
 WORKDIR /app
@@ -18,4 +18,3 @@ EXPOSE 8000
 
 # Specify the command to run your Django app
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-
